@@ -2,12 +2,13 @@ import { screen, render } from '@testing-library/react';
 import { MemoryRouter, Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
+import React from 'react';
 import App from '../App';
 
 describe('Requisito 1', () => {
   render(<MemoryRouter><App /></MemoryRouter>);
 
-  it ('Requisito 1/1 - Links', () => {
+  it('Requisito 1/1 - Links', () => {
     const elemLink1 = screen.getByRole('link', {
       name: /home/i,
     });
@@ -20,7 +21,6 @@ describe('Requisito 1', () => {
     expect(elemLink1).toBeInTheDocument();
     expect(elemLink2).toBeInTheDocument();
     expect(elemLink3).toBeInTheDocument();
-
 
     userEvent.click(elemLink1);
     const homeText = screen.getByRole('heading', {
@@ -42,5 +42,18 @@ describe('Requisito 1', () => {
       level: 2,
     });
     expect(favoriteText).toBeInTheDocument();
+  });
+
+  it('Página não encontrada', () => {
+    const historico = createMemoryHistory();
+
+    render(<Router history={ historico }><App /></Router>);
+    historico.push('/*');
+
+    const notFoundText = screen.getByRole('heading', {
+      name: /page requested not found/i,
+      level: 2,
+    });
+    expect(notFoundText).toBeInTheDocument();
   });
 });
