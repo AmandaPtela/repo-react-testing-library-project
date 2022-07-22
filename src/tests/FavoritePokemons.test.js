@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import React from 'react';
 import FavoritePokemons from '../pages/FavoritePokemons';
-import renderWithRouter from '../components/renderWithRouter';
+import renderWithRouter from '../components/renderWithRouter.js';
 
 describe(' Testa página Favoritos', () => {
   beforeEach(() => {
