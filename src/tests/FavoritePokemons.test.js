@@ -1,9 +1,7 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import React from 'react';
 import FavoritePokemons from '../pages/FavoritePokemons';
 import renderWithRouter from '../components/renderWithRouter';
-import App from '../App';
-import { readFavoritePokemonIds } from '../services/pokedexService';
 
 describe(' Testa página Favoritos', () => {
   beforeEach(() => {
@@ -14,9 +12,9 @@ describe(' Testa página Favoritos', () => {
     readFavoritePokemonIds();
     expect(readFavoritePokemonIds).toHaveBeenCalled();
   });
-  
+
   test('Verifica se todos os cards são exibidos', () => {
-/*     if (readFavoritePokemonIds()) {
+    /* if (readFavoritePokemonIds()) {
       const alink = screen.getByText('More details');
       const alinkAtt = alink.getAttribute('href').split('/');
       const linkFav = alinkAtt[2] === 25;
@@ -24,5 +22,5 @@ describe(' Testa página Favoritos', () => {
     } */
     const textFavorites = screen.getByText(/No favorite pokemon found/i);
     expect(textFavorites).toBeInTheDocument();
-  })
+  });
 });
