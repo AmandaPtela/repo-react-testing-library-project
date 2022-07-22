@@ -7,7 +7,14 @@ const renderWithRouter = (component) => {
   const history = createMemoryHistory();
 
   return ({
-    ...render(<Router history={ history } pokemons={(state) => this.state}>{component}</Router>), history,
+    ...render(
+      <Router
+        history={ history }
+      >
+        { component }
+      </Router>,
+    ),
+    history,
   });
 };
 
