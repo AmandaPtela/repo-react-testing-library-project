@@ -20,14 +20,16 @@ describe('Teste o componente <Pokemons/>', () => {
     151: 'Mew',
   };
   test('Verificar informações detalhadas do pokémon selecionado', () => {
+    const pedaço1 = 'This intelligent Pokémon roasts hard berries with electricity ';
+    const pedaço2 = 'to make them tender enough to eat.';
     const resumosPokemons = {
       4: `The flame on its tail shows the strength of its life force. If it is
        weak, the flame also burns weakly.`,
       10: `For protection, it releases a horrible stench from the antennae
        on its head to drive away enemies.`,
-      23: `It can freely detach its jaw to swallow large prey whole. 
+      23: `It can freely detach its jaw to swallow large prey whole.
       It can become too heavy to move, however.`,
-      25: `This intelligent Pokémon roasts hard berries with electricity to make them tender enough to eat.`,
+      25: pedaço1 + pedaço2,
       65: `Closing both its eyes heightens all its other senses. 
       This enables it to use its abilities to their extremes.`,
       78: `At full gallop, its four hooves barely touch the ground
@@ -45,6 +47,7 @@ describe('Teste o componente <Pokemons/>', () => {
     });
     const linkPokemon = botaoDetalhes.getAttribute('href').split('/');
     userEvent.click(botaoDetalhes);
+
     const tituloPokemon = screen.getByRole('heading', {
       name: `${nomesPokemons[linkPokemon[2]]} Details`,
       level: 2,
@@ -56,7 +59,7 @@ describe('Teste o componente <Pokemons/>', () => {
     });
 
     const infoPokemon = sumario.nextSibling.textContent;
-
+    expect(infoPokemon).toBeDefined();
     expect(infoPokemon).toBe(resumosPokemons[linkPokemon[2]]);
     expect(tituloPokemon).toBeInTheDocument();
     expect(sumario).toBeInTheDocument();
